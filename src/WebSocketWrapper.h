@@ -9,6 +9,12 @@ static PyObject *WebSocket_end(WebSocketObject *self, PyObject *args) {
 	return Py_None;
 }
 
+static PyObject *WebSocket_close(WebSocketObject *self, PyObject *Py_UNUSED(ignored)) {
+    self->ws->close();
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
 static PyObject *WebSocket_send(WebSocketObject *self, PyObject **args, int nargs) {
 
 	PyObject *pythonMessage = args[0];
@@ -34,6 +40,7 @@ static PyObject *WebSocket_send(WebSocketObject *self, PyObject **args, int narg
 static PyMethodDef WebSocket_methods[] = {
     {"end", (PyCFunction) WebSocket_end, METH_VARARGS, "no doc"},
     {"send", (PyCFunction) WebSocket_send, METH_FASTCALL, "no doc"},
+    {"close", (PyCFunction) WebSocket_close, METH_NOARGS, "no doc"},
     {NULL}
 };
 

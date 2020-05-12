@@ -8,13 +8,16 @@ asyncio.set_event_loop(uws.Loop())
 app = uws.App()
 
 def wsOpen(ws, req):
-	print("WebSocket opened!")
+        print("WebSocket opened!")
 
 def wsMessage(ws, message, isBinary):
-	ws.send(message)
+        ws.send(message)
+        print(message)
+        if message == "q":
+                ws.close()
 
 def wsClose(ws, code, message):
-	print("WebSocket closed!")
+        print("WebSocket closed!")
 
 app.ws("/*", {"maxPayloadLength": 1024,
               "open": wsOpen,
