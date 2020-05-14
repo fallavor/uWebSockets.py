@@ -9,12 +9,6 @@ static PyObject *WebSocket_end(WebSocketObject *self, PyObject *args) {
 	return Py_None;
 }
 
-static PyObject *WebSocket_close(WebSocketObject *self, PyObject *Py_UNUSED(ignored)) {
-    self->ws->close();
-    Py_INCREF(Py_None);
-    return Py_None;
-}
-
 static PyObject *WebSocket_send(WebSocketObject *self, PyObject **args, int nargs) {
 
 	PyObject *pythonMessage = args[0];
@@ -40,17 +34,57 @@ static PyObject *WebSocket_send(WebSocketObject *self, PyObject **args, int narg
 static PyMethodDef WebSocket_methods[] = {
     {"end", (PyCFunction) WebSocket_end, METH_VARARGS, "no doc"},
     {"send", (PyCFunction) WebSocket_send, METH_FASTCALL, "no doc"},
-    {"close", (PyCFunction) WebSocket_close, METH_NOARGS, "no doc"},
     {NULL}
 };
 
 static PyTypeObject WebSocketType = {
     PyVarObject_HEAD_INIT(NULL, 0)
-    .tp_name = "WebSocket",
-    .tp_basicsize = sizeof(WebSocketObject),
-    .tp_itemsize = 0,
-    .tp_flags = Py_TPFLAGS_DEFAULT,
-    .tp_doc = "no doc",
-    .tp_methods = WebSocket_methods,
-    .tp_new = PyType_GenericNew,
+    "WebSocket",  // tp_name
+    sizeof(WebSocketObject), // tp_basicsize
+    0, // tp_itemsize
+    nullptr,  // tp_dealloc
+    0,  // tp_print
+    nullptr, // tp_getattr
+    nullptr, // tp_setattr
+    nullptr, // tp_as_async
+
+    nullptr, // tp_repr
+
+    nullptr, // tp_as_number;
+    nullptr, // tp_as_sequence;
+    nullptr, // tp_as_mapping;
+
+    nullptr, // tp_hash;
+    nullptr, // tp_call;
+    nullptr, // tp_str;
+    nullptr, // tp_getattro;
+    nullptr, // tp_setattro;
+
+    nullptr, // tp_as_buffer
+
+    Py_TPFLAGS_DEFAULT,  // tp_flags
+    "no doc",  // tp_doc
+
+    nullptr, // tp_traverse
+
+    nullptr, // tp_clear
+    nullptr, // tp_richcompare
+
+    0, //tp_weaklistoffset
+
+    nullptr, // tp_iter;
+    nullptr, // tp_iternext;
+
+    WebSocket_methods, // tp_methods
+    nullptr, // tp_members;
+    nullptr, // tp_getset;
+    nullptr, // tp_base;
+
+    nullptr, // tp_dict;
+    nullptr, // tp_descr_get;
+    nullptr, // tp_descr_set;
+    0, // tp_dictoffset;
+    nullptr, // tp_init;
+    nullptr, // tp_alloc;    
+    PyType_GenericNew, //tp_new
 };

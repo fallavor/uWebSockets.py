@@ -12,10 +12,10 @@
 
 /* Module definition */
 static PyModuleDef custommodule = {
-    PyModuleDef_HEAD_INIT,
-    .m_name = "uwebsocketspy",
-    .m_doc = "uWebSockets.py",
-    .m_size = -1,
+    PyModuleDef_HEAD_INIT,  //m_base;
+    "uwebsocketspy",  //_name;
+    "uWebSockets.py", // m_doc;
+    -1, //m_size;
 };
 
 #include <uv.h>
@@ -52,7 +52,7 @@ static PyMethodDef methods[] = {
 
 PyMODINIT_FUNC PyInit_uwebsocketspy() {
 
-    printf("Compiled against Python version: %d.%d.%d\n", PY_MAJOR_VERSION, PY_MINOR_VERSION, PY_MICRO_VERSION);
+    printf("changed Compiled against Python version: %d.%d.%d\n", PY_MAJOR_VERSION, PY_MINOR_VERSION, PY_MICRO_VERSION);
     //printf("Compiled against libuv version: %d.%d.%d\n", UV_VERSION_MAJOR, UV_VERSION_MINOR, UV_VERSION_PATCH);
     //printf("Linked against libuv version: %s\n", uv_version_string());
 

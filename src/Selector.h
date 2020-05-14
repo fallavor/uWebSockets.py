@@ -352,17 +352,17 @@ static PyObject *Selector_new(PyTypeObject *type, PyObject *args, PyObject *kwds
         }, SIGINT);
 
         PyStructSequence_Field fields[] = {
-            {"fileobj", "doc"},
-            {"fd", "doc"},
-            {"events", "doc"},
-            {"data", "doc"},
-            {"__module__", "doc"},
+            {const_cast<char*>("fileobj"), const_cast<char*>("doc")},
+            {const_cast<char*>("fd"), const_cast<char*>("doc")},
+            {const_cast<char*>("events"), const_cast<char*>("doc")},
+            {const_cast<char*>("data"), const_cast<char*>("doc")},
+            {const_cast<char*>("__module__"), const_cast<char*>("doc")},
             NULL
         };
 
         PyStructSequence_Desc desc = {
-            "uWS.SelectorKey",
-            "doc",
+            const_cast<char*>("uWS.SelectorKey"),
+            const_cast<char*>("doc"),
             fields,
             4
         };
@@ -391,11 +391,52 @@ static PyObject *Selector_new(PyTypeObject *type, PyObject *args, PyObject *kwds
 
 static PyTypeObject SelectorType = {
     PyVarObject_HEAD_INIT(NULL, 0)
-    .tp_name = "uWS.Selector",
-    .tp_basicsize = sizeof(SelectorObject),
-    .tp_itemsize = 0,
-    .tp_flags = Py_TPFLAGS_DEFAULT,
-    .tp_doc = "no doc",
-    .tp_methods = Selector_methods,
-    .tp_new = Selector_new,
+    "uWS.Selector",  // tp_name
+    sizeof(SelectorObject), // tp_basicsize
+    0, // tp_itemsize
+    nullptr,  // tp_dealloc
+    0,  // tp_print
+    nullptr, // tp_getattr
+    nullptr, // tp_setattr
+    nullptr, // tp_as_async
+
+    nullptr, // tp_repr
+
+    nullptr, // tp_as_number;
+    nullptr, // tp_as_sequence;
+    nullptr, // tp_as_mapping;
+
+    nullptr, // tp_hash;
+    nullptr, // tp_call;
+    nullptr, // tp_str;
+    nullptr, // tp_getattro;
+    nullptr, // tp_setattro;
+
+    nullptr, // tp_as_buffer
+
+    Py_TPFLAGS_DEFAULT,  // tp_flags
+    "no doc",  // tp_doc
+
+    nullptr, // tp_traverse
+
+    nullptr, // tp_clear
+    nullptr, // tp_richcompare
+
+    0, //tp_weaklistoffset
+
+    nullptr, // tp_iter;
+    nullptr, // tp_iternext;
+
+    Selector_methods, // tp_methods
+    nullptr, // tp_members;
+    nullptr, // tp_getset;
+    nullptr, // tp_base;
+
+    nullptr, // tp_dict;
+    nullptr, // tp_descr_get;
+    nullptr, // tp_descr_set;
+    0, // tp_dictoffset;
+    nullptr, // tp_init;
+    nullptr, // tp_alloc;    
+    Selector_new, //tp_new
 };
