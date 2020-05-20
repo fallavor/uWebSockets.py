@@ -1,4 +1,3 @@
-#pragma once
 typedef struct {
     PyObject_HEAD
         uWS::WebSocket<false, true>* ws;
