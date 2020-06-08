@@ -182,8 +182,10 @@ static PyObject *App_ws(AppObject *self, PyObject *args) {
 
 
                         // construct the ws and req wrappers here
-                        PyObject_CallFunctionObjArgs(value, perSocketData->self, pythonMessage, value, NULL);
-
+                        auto r = PyObject_CallFunctionObjArgs(value, perSocketData->self, pythonMessage, value, NULL);
+                        if (r == NULL) {
+                            PyErr_Print();
+                        }
 
                         Py_DECREF(pythonMessage);
                     };
