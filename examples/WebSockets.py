@@ -20,6 +20,7 @@ def wsClose(ws, code, message):
         print("WebSocket closed!")
 
 app.ws("/*", {"maxPayloadLength": 1024,
+              "idleTimeout": 300,
               "open": wsOpen,
               "message": wsMessage,
               "close": wsClose

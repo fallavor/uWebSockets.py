@@ -188,10 +188,17 @@ static PyObject *App_ws(AppObject *self, PyObject *args) {
                         Py_DECREF(pythonMessage);
                     };
                 }
-            } else if (keyString == "maxPayloadLength") {
-                printf("setting maxPAyloadLength!\n");
-            } else {
-                printf("unhandled key in dict!\n");
+            } 
+            else if (keyString == "maxPayloadLength") {                
+                behavior.maxPayloadLength = _PyLong_AsInt(value);
+                printf("setting maxPAyloadLength: %d\n", behavior.maxPayloadLength);
+            }
+            else if (keyString == "idleTimeout") {
+                behavior.idleTimeout = _PyLong_AsInt(value);
+                printf("setting idleTimeout: %d\n", behavior.idleTimeout);                
+            }
+            else {
+                printf("unhandled key in dict: %s!\n", keyString);
             }
 
         }
